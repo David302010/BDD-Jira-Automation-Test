@@ -1,0 +1,6 @@
+Feature: Jira -Logout
+  User wants to log out from Jira
+
+  Scenario: I log out from Jira
+    When I click on the logout button
+    Then Logout page appears with option to log in again
