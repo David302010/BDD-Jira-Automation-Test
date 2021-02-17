@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty"},
-        tags = "@Logout")
+        tags = "@Test1")
 
 
 public class RunCucumberTest {
