@@ -1,14 +1,12 @@
 package jiraTest;
 
 
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static org.junit.Assert.*;
 
-import jiraTest.Login;
 import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,11 +20,11 @@ import java.util.concurrent.TimeUnit;
 
 public class StepDefinitions {
     private WebDriver driver = null;
-    private Login login = new Login();
     private LoginPage loginPage = new LoginPage();
     private DashBoardPage dashBoardPage = new DashBoardPage();
 
     // scenario successful
+
     @When("I enter userName and password and click Submit")
     public void enterCredentials() {
         loginPage.loginAttempt(System.getenv("userName"), System.getenv("password"));
@@ -66,18 +64,13 @@ public class StepDefinitions {
     // scenario logout
     @When("I click on the logout button")
     public void logout() {
-        driver = login.login(driver, System.getenv("userName"), System.getenv("password"));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//img[starts-with(@alt, 'User profile')]")).click();
-        driver.findElement(By.id("log_out")).click();
+        dashBoardPage.logout();
     }
 
     @Then("Logout page appears with option to log in again")
     public void checkIfLoggedOut() {
-        System.out.println(3);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement loginOption = driver.findElement(By.xpath("//a[text()='Log In']"));
-        assertNotNull(loginOption);
+        WebElement logoutConfirmation = dashBoardPage.checkLoginAgain();
+        assertNotNull(logoutConfirmation);
     }
 
     // Background
