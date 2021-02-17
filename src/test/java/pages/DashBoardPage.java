@@ -64,7 +64,7 @@ public class DashBoardPage {
         return logout.isDisplayed();
     }
 
-    public WebElement logout(){
+    public void logout(){
         try {
 //            wait.until(ExpectedConditions.visibilityOf(userIcon));
             wait.until(ExpectedConditions.elementToBeClickable(userIcon));
@@ -78,10 +78,7 @@ public class DashBoardPage {
             wait.until(ExpectedConditions.visibilityOf(logoutConfirmation));
         }catch (TimeoutException e){
             System.out.println("no logout confirmation?");
-            return null;
         }
-
-        return logoutConfirmation;
     }
 
     public void browseProject(String projectName){
@@ -101,5 +98,14 @@ public class DashBoardPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(checkIconXpath)));
         WebElement icon = driver.findElement(By.xpath(checkIconXpath));
         return icon.getAttribute("alt");
+    }
+
+    public WebElement checkLoginAgain() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(logoutConfirmation));
+        }catch (TimeoutException e){
+            System.out.println("no logout confirmation?");
+        }
+        return logoutConfirmation;
     }
 }
